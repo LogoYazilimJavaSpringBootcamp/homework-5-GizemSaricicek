@@ -1,5 +1,5 @@
 ## **HOMEWORK-5**
--> 1 ve 2. soruların cevapları "LogoBootcampHW5-SözelSorularVeCevapları" adlı pdf dosyasındadır.
+-> 1. ve 2. soruların cevapları "LogoBootcampHW5-SözelSorularVeCevapları" adlı pdf dosyasındadır.
 
 1. Spring Profile nedir? Properties ya da yml dosya formları ile isbasi uygulamasına test
 profile ekleyin.(5 Puan)
