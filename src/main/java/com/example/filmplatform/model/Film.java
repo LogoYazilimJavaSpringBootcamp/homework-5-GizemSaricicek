@@ -14,16 +14,7 @@ public class Film {
     @Column
     private Integer year;
 
-//    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-//    @JoinTable(
-//            name="users_films",
-//            joinColumns = {@JoinColumn(name = "film_id")},
-//            inverseJoinColumns = {@JoinColumn(name  = "user_id")}
-//    )
-//    private List<User> userList = new ArrayList<>(10);
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     public String getName() {
@@ -58,15 +49,15 @@ public class Film {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void addUser(User user) {
-        this.user=user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+//
+//    public void addUser(User user) {
+//        this.user=user;
+//    }
 }

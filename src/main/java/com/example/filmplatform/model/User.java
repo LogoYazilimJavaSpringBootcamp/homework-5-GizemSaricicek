@@ -21,8 +21,9 @@ public class User {
 
 //    @ManyToMany(mappedBy = "userList", cascade = CascadeType.ALL)
 //    private List<Film> filmList = new ArrayList<>(10);
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "film_id", insertable = true, updatable = false)
+    @JoinColumn(name = "user_id", insertable = true)
     private List<Film> filmList = new ArrayList<>(10);
 
     public String getName() {

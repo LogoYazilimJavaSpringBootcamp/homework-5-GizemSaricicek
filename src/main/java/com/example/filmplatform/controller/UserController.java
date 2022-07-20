@@ -42,6 +42,10 @@ public class UserController {
         return userService.updatePassword(id, userRequest);
     }
 
+    @PutMapping(value ="/{id}/addFilm")
+    public User addFilmToUser(@PathVariable Integer id, @RequestBody Film filmRequest){
+        return userService.addFilmToUser(id, filmRequest);
+    }
 //    @PostMapping(value = "/addFilm/{id}")
 //    public Film addFilm(@RequestBody Film filmRequest, @PathVariable Integer id){ return userService.addFilm(filmRequest, id);}
 

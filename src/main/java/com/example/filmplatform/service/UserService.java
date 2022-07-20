@@ -1,10 +1,13 @@
 package com.example.filmplatform.service;
 
 import com.example.filmplatform.model.Film;
+import com.example.filmplatform.repository.FilmRepository;
 import com.example.filmplatform.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import com.example.filmplatform.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,6 +15,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FilmRepository filmRepository;
     public User createUser(User user) { return userRepository.save(user); } // user oluşturmak için metod
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -46,11 +51,12 @@ public class UserService {
         return userRepository.save(foundUser);
     }
 
-//    public User addFilmToUser(Integer userId, Film filmRequest) {
-//
-//        User foundUser = userRepository.findById(userId).get();
-//        filmRepository.saveFilm(filmRequest);
-//        foundUser.getFilmList().add(filmRequest);
-//        return userRepository.save(foundUser);
-//    }
+    public User addFilmToUser(Integer id, Film filmRequest) {
+
+        User foundUser = userRepository.findById(id).get();
+        foundUser.getFilmList().add(filmRequest);
+        //filmRepository.save(filmRequest);
+        return userRepository.save(foundUser);
+    }
+
 }
