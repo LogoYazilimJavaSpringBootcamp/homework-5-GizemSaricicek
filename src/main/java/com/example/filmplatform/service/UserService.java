@@ -15,8 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
-    private FilmRepository filmRepository;
+    private RabbitMqService rabbitMqService;
     public User createUser(User user) { return userRepository.save(user); } // user oluşturmak için metod
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -53,9 +54,13 @@ public class UserService {
 
     public User addFilmToUser(Integer id, Film filmRequest) {
 
+
         User foundUser = userRepository.findById(id).get();
         foundUser.getFilmList().add(filmRequest);
-        //filmRepository.save(filmRequest);
+
+        //film eklendiğinde mail iletilmesi amacıyla queue'ya değer atama yapılması için metod çağırma
+        rabbitMqService.sendEmail(foundUser.getEmail());
+
         return userRepository.save(foundUser);
     }
 
