@@ -21,12 +21,8 @@ public class User {
     private String email;
     @Column
     private String password;
-
-//    @ManyToMany(mappedBy = "userList", cascade = CascadeType.ALL)
-//    private List<Film> filmList = new ArrayList<>(10);
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", insertable = true)
     private List<Film> filmList = new ArrayList<>(10);
-    
+
 }

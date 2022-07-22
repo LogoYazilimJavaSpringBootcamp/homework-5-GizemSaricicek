@@ -1,6 +1,7 @@
 package com.example.filmplatform.controller;
 
 //import com.example.filmplatform.dto.Payment;
+import com.example.filmplatform.dto.Payment;
 import com.example.filmplatform.model.Film;
 import com.example.filmplatform.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,10 @@ public class UserController {
         return userService.createUser(userRequest);
     }
 
-//    @PostMapping(value = "/{id}/makeMember")
-//    public Payment makeMembership(@PathVariable Integer id, @RequestBody Payment payment){
-//        return userService.makeMembership(id,payment);
-//    }
+    @PostMapping(value = "/{id}/makeMember")
+    public Payment makeMembership(@PathVariable Integer id, @RequestBody Payment payment){
+        return userService.makeMembership(id,payment);
+    }
 
     @GetMapping // tüm user'ların listelenmesi için bir end point
     public List<User> getAllUsers(){return userService.getAllUsers();}

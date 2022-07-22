@@ -1,14 +1,17 @@
 package com.example.filmplatform.service;
 
-//import com.example.filmplatform.client.PaymentClient;
-//import com.example.filmplatform.dto.Payment;
+import com.example.filmplatform.client.PaymentClient;
+import com.example.filmplatform.dto.Payment;
 import com.example.filmplatform.model.Film;
+import com.example.filmplatform.model.enums.CurrencyType;
 import com.example.filmplatform.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.example.filmplatform.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,16 +26,18 @@ public class UserService {
 
 //    @Autowired
 //    private PaymentClient paymentClient;
+    @Autowired
+    private PaymentClient paymentClient;
 
     public User createUser(User user) {
         return userRepository.save(user); } // user oluşturmak için metod
 
-//    public Payment makeMembership(Integer userId, Payment paymentRequest){ //üyelik ödemesi yapmak için metod
-//        // payment service'i ile iletişim için
-//        Payment payment = paymentClient.createPayment(new Payment(userId,LocalDateTime.now(), paymentRequest.getCurrencyType(), paymentRequest.getAmount(), paymentRequest.getMonth()));
-//        log.info(payment.toString());
-//        return paymentRequest;
-//    }
+    public Payment makeMembership(Integer userId, Payment paymentRequest){ //üyelik ödemesi yapmak için metod
+        // payment service'i ile iletişim için
+        Payment payment = paymentClient.createPayment(new Payment(userId, LocalDateTime.now(), paymentRequest.getCurrencyType(), paymentRequest.getAmount(), paymentRequest.getMonth()));
+        log.info(payment.toString());
+        return paymentRequest;
+    }
     public List<User> getAllUsers() {
         return userRepository.findAll();
     } // tüm user'ları listelemek için metod
