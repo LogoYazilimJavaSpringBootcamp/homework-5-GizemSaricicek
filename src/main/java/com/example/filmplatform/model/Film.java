@@ -1,7 +1,10 @@
 package com.example.filmplatform.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 @Entity
+@Data
 @Table(name = "film")
 public class Film {
     @Id
@@ -13,51 +16,6 @@ public class Film {
     private String subject;
     @Column
     private Integer year;
-
     @ManyToOne
     private User user;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-//    public void addUser(User user) {
-//        this.user=user;
-//    }
 }

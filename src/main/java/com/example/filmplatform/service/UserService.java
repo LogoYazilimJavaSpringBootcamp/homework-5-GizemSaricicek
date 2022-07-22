@@ -1,16 +1,18 @@
 package com.example.filmplatform.service;
 
+//import com.example.filmplatform.client.PaymentClient;
+//import com.example.filmplatform.dto.Payment;
 import com.example.filmplatform.model.Film;
-import com.example.filmplatform.repository.FilmRepository;
 import com.example.filmplatform.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.example.filmplatform.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -18,7 +20,19 @@ public class UserService {
 
     @Autowired
     private RabbitMqService rabbitMqService;
-    public User createUser(User user) { return userRepository.save(user); } // user oluşturmak için metod
+
+//    @Autowired
+//    private PaymentClient paymentClient;
+
+    public User createUser(User user) {
+        return userRepository.save(user); } // user oluşturmak için metod
+
+//    public Payment makeMembership(Integer userId, Payment paymentRequest){ //üyelik ödemesi yapmak için metod
+//        // payment service'i ile iletişim için
+//        Payment payment = paymentClient.createPayment(new Payment(userId,LocalDateTime.now(), paymentRequest.getCurrencyType(), paymentRequest.getAmount(), paymentRequest.getMonth()));
+//        log.info(payment.toString());
+//        return paymentRequest;
+//    }
     public List<User> getAllUsers() {
         return userRepository.findAll();
     } // tüm user'ları listelemek için metod
@@ -52,8 +66,7 @@ public class UserService {
         return userRepository.save(foundUser);
     }
 
-    public User addFilmToUser(Integer id, Film filmRequest) {
-
+    public User  addFilmToUser(Integer id, Film filmRequest) { //film eklemek için metod
 
         User foundUser = userRepository.findById(id).get();
         foundUser.getFilmList().add(filmRequest);
@@ -63,5 +76,4 @@ public class UserService {
 
         return userRepository.save(foundUser);
     }
-
 }
