@@ -75,7 +75,7 @@ gereklidir.)
 * Email gönderme işlemi asenkron gerçekleşmelidir.
 * Üyelikler 1-3-6-12 ay olarak alınabilir.
 
-#################################
+### **Ücretlendirme ile ilgili bilgilendirme:**
 Sistemde girilen ay değerine göre ödenecek fiyat sistem içerisinden aktarılıyor.
 * 1 ay -> 20 (TL, USD, EUR)
 * 3 ay -> 60 (TL, USD, EUR)
