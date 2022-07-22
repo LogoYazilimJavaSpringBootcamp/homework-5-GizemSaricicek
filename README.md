@@ -74,3 +74,10 @@ gereklidir.)
 * Ödeme servisi sadece ödeme bilgilerini kaydeder ve başarılı response döner.
 * Email gönderme işlemi asenkron gerçekleşmelidir.
 * Üyelikler 1-3-6-12 ay olarak alınabilir.
+
+#################################
+Sistemde girilen ay değerine göre ödenecek fiyat sistem içerisinden aktarılıyor.
+* 1 ay -> 20 (TL, USD, EUR)
+* 3 ay -> 60 (TL, USD, EUR)
+* 6 ay -> 120 (TL, USD, EUR)
+* 12 ay -> 240 (TL, USD, EUR)
