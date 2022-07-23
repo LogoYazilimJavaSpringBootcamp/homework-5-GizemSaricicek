@@ -2,6 +2,8 @@ package com.example.filmplatform.service;
 
 import com.example.filmplatform.client.PaymentClient;
 import com.example.filmplatform.dto.Payment;
+import com.example.filmplatform.exception.AddNewFilmException;
+import com.example.filmplatform.exception.UserNotFoundException;
 import com.example.filmplatform.model.Film;
 import com.example.filmplatform.model.enums.CurrencyType;
 import com.example.filmplatform.repository.UserRepository;
@@ -36,6 +38,9 @@ public class UserService {
         // payment service'i ile iletişim için
 
         Double amount=0.0;
+
+//        amount =  paymentRequest.getMonth()  * 20.0;
+
         switch(paymentRequest.getMonth()){
             case 1:
                 amount = 20.0;
@@ -54,15 +59,35 @@ public class UserService {
         log.info(payment.toString());
         return payment;
     }
-    public List<User> getAllUsers() {
+
+    public User addFilmToUser(Integer id, Film filmRequest) { //film eklemek için metod
+
+        User foundUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("There is no user with this informations."));;
+
+        List<Payment> payments = paymentClient.getPaymentsByUserId(id);
+
+        if(payments.isEmpty()){
+            if(foundUser.getFilmList().size()<3){
+                foundUser.getFilmList().add(filmRequest);
+            }
+            else
+                throw new AddNewFilmException("The movie could not be added! Users without a membership can add up to 3 movies.");
+        }
+        else {
+            foundUser.getFilmList().add(filmRequest);
+        }
+
+        //film eklendiğinde mail iletilmesi amacıyla queue'ya değer atama yapılması için metod çağırma
+        rabbitMqService.sendEmail(foundUser.getEmail());
+        return userRepository.save(foundUser);
+    }
+
+    public List<User> getAllUsers() { // tüm user'ları listelemek için metod
         return userRepository.findAll();
-    } // tüm user'ları listelemek için metod
+    }
     public User getUserByEmailAndPassword(String email, String password) { //email ve password'e göre user getirmek için emtod
 
-        User found = userRepository.findByEmailAndPassword(email, password);
-        if(found==null){
-            throw new RuntimeException(); // eğer user bulunmuyorsa exception throw ediliyor.
-        }
+        User found = userRepository.findByEmailAndPassword(email, password).orElseThrow(() -> new UserNotFoundException("There is no user with this informations."));
         return found;
     }
 
@@ -84,16 +109,6 @@ public class UserService {
         User foundUser = userRepository.findById(id).get();
         foundUser.setPassword(userRequest.getPassword());
 
-        return userRepository.save(foundUser);
-    }
-
-    public User  addFilmToUser(Integer id, Film filmRequest) { //film eklemek için metod
-
-        User foundUser = userRepository.findById(id).get();
-        foundUser.getFilmList().add(filmRequest);
-
-        //film eklendiğinde mail iletilmesi amacıyla queue'ya değer atama yapılması için metod çağırma
-        rabbitMqService.sendEmail(foundUser.getEmail());
         return userRepository.save(foundUser);
     }
 }

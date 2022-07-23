@@ -1,6 +1,8 @@
 package com.example.filmplatform.client;
 import com.example.filmplatform.dto.Payment;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -11,6 +13,6 @@ public interface PaymentClient {
     @PostMapping(value = "/payments")
     Payment createPayment(@RequestBody Payment payment);
 
-//    @GetMapping("/payments/{id}")
-//    List<Payment> getPaymentsByUserId(@PathVariable Integer id);
+    @GetMapping("/payments/{userId}")
+    List<Payment> getPaymentsByUserId(@PathVariable Integer userId);
 }
