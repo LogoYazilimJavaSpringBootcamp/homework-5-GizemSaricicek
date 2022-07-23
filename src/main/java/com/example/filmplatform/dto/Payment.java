@@ -13,10 +13,10 @@ public class Payment {
     private Integer userId;
     private LocalDateTime paymentDate;
     private CurrencyType currencyType;
-    private BigDecimal amount;
+    private Double amount;
     private Integer month; // 1-3-6-12
 
-    public Payment(Integer userId, LocalDateTime paymentDate, CurrencyType currencyType, BigDecimal amount, Integer month) {
+    public Payment(Integer userId, LocalDateTime paymentDate, CurrencyType currencyType, Double amount, Integer month) {
         this.userId = userId;
         this.paymentDate = paymentDate;
         this.currencyType = currencyType;

@@ -34,9 +34,25 @@ public class UserService {
 
     public Payment makeMembership(Integer userId, Payment paymentRequest){ //üyelik ödemesi yapmak için metod
         // payment service'i ile iletişim için
-        Payment payment = paymentClient.createPayment(new Payment(userId, LocalDateTime.now(), paymentRequest.getCurrencyType(), paymentRequest.getAmount(), paymentRequest.getMonth()));
+
+        Double amount=0.0;
+        switch(paymentRequest.getMonth()){
+            case 1:
+                amount = 20.0;
+                break;
+            case 3:
+                amount = 60.0;
+                break;
+            case 6:
+                amount = 120.0;
+                break;
+            case 12:
+                amount =240.0;
+                break;
+        }
+        Payment payment = paymentClient.createPayment(new Payment(userId, LocalDateTime.now(), paymentRequest.getCurrencyType(), amount, paymentRequest.getMonth()));
         log.info(payment.toString());
-        return paymentRequest;
+        return payment;
     }
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -78,7 +94,6 @@ public class UserService {
 
         //film eklendiğinde mail iletilmesi amacıyla queue'ya değer atama yapılması için metod çağırma
         rabbitMqService.sendEmail(foundUser.getEmail());
-
         return userRepository.save(foundUser);
     }
 }

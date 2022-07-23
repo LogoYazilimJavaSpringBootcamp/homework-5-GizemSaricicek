@@ -1,5 +1,6 @@
 package com.example.filmplatform.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Film {
     private String subject;
     @Column
     private Integer year;
+    @JsonIgnore
     @ManyToOne
     private User user;
 }

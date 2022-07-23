@@ -1,5 +1,6 @@
 package com.example.filmplatform.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class User {
     private String email;
     @Column
     private String password;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", insertable = true)
     private List<Film> filmList = new ArrayList<>(10);
