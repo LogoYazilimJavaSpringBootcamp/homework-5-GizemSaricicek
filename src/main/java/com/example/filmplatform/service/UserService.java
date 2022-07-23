@@ -6,14 +6,11 @@ import com.example.filmplatform.exception.AddNewFilmException;
 import com.example.filmplatform.exception.UnacceptableMembershipMonth;
 import com.example.filmplatform.exception.UserNotFoundException;
 import com.example.filmplatform.model.Film;
-import com.example.filmplatform.model.enums.CurrencyType;
 import com.example.filmplatform.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.example.filmplatform.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -29,8 +26,6 @@ public class UserService {
     @Autowired
     private RabbitMqService rabbitMqService;
 
-//    @Autowired
-//    private PaymentClient paymentClient;
     @Autowired
     private PaymentClient paymentClient;
 

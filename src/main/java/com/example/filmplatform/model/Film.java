@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "film")
@@ -20,4 +23,8 @@ public class Film {
     @JsonIgnore
     @ManyToOne
     private User user;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "film_id", insertable = true)
+    private List<Comment> commentList = new ArrayList<>(10);
 }
