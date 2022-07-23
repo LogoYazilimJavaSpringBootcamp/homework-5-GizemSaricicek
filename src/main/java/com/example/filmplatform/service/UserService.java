@@ -3,6 +3,7 @@ package com.example.filmplatform.service;
 import com.example.filmplatform.client.PaymentClient;
 import com.example.filmplatform.dto.Payment;
 import com.example.filmplatform.exception.AddNewFilmException;
+import com.example.filmplatform.exception.UnacceptableMembershipMonth;
 import com.example.filmplatform.exception.UserNotFoundException;
 import com.example.filmplatform.model.Film;
 import com.example.filmplatform.model.enums.CurrencyType;
@@ -14,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -35,26 +38,23 @@ public class UserService {
         return userRepository.save(user); } // user oluşturmak için metod
 
     public Payment makeMembership(Integer userId, Payment paymentRequest){ //üyelik ödemesi yapmak için metod
-        // payment service'i ile iletişim için
 
         Double amount=0.0;
 
-//        amount =  paymentRequest.getMonth()  * 20.0;
+        Set<Integer> months = new HashSet<>();
+        months.add(1);
+        months.add(3);
+        months.add(6);
+        months.add(12);
 
-        switch(paymentRequest.getMonth()){
-            case 1:
-                amount = 20.0;
-                break;
-            case 3:
-                amount = 60.0;
-                break;
-            case 6:
-                amount = 120.0;
-                break;
-            case 12:
-                amount =240.0;
-                break;
+        if(!months.contains(paymentRequest.getMonth())){
+             throw new UnacceptableMembershipMonth("Cannot be a member. Only 1, 3, 6 and 12 month memberships are available.");
         }
+        else{
+            amount = paymentRequest.getMonth()*20.0; //default olarak her ay için 20 birim para
+        }
+
+        // payment service'i ile iletişim için
         Payment payment = paymentClient.createPayment(new Payment(userId, LocalDateTime.now(), paymentRequest.getCurrencyType(), amount, paymentRequest.getMonth()));
         log.info(payment.toString());
         return payment;

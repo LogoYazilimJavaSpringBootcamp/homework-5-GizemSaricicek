@@ -1,5 +1,5 @@
 package com.example.filmplatform.model.enums;
 
 public enum CurrencyType {
-    TL, USD
+    TL, USD, EUR
 }
