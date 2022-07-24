@@ -2,7 +2,7 @@ package com.example.filmplatform.exception;
 
 public class UserNotFoundException extends RuntimeException {
 
-    public UserNotFoundException(String errorMessage) {
-        super(errorMessage);
+    public UserNotFoundException() {
+        super("There is no user with this informations.");
     }
 }

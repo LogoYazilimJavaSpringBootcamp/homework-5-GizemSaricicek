@@ -21,7 +21,7 @@ public class CommentService {
 
     public Comment createComment(Integer filmId, Comment commentRequest) {
 
-        Film foundFilm = filmRepository.findById(filmId).orElseThrow(() -> new FilmNotFoundException("There is no film."));
+        Film foundFilm = filmRepository.findById(filmId).orElseThrow(() -> new FilmNotFoundException());
         foundFilm.getCommentList().add(commentRequest); //film'in comment listesine comment ekleniyor
         commentRequest.setFilm(foundFilm);
         filmRepository.save(foundFilm);
@@ -30,12 +30,12 @@ public class CommentService {
     }
 
     public List<Comment> getCommentByFilmId(Integer filmId) {
-        Film foundFilm = filmRepository.findById(filmId).orElseThrow(() -> new FilmNotFoundException("There is no film."));
+        Film foundFilm = filmRepository.findById(filmId).orElseThrow(() -> new FilmNotFoundException());
         return commentRepository.findByFilmId(foundFilm.getId());
     }
 
     public String deleteCommentById(Integer commentId) {
-        Comment foundComment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException("There is no comment."));
+        Comment foundComment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException());
         commentRepository.delete(foundComment);
         return "Comment Deleted!";
 
