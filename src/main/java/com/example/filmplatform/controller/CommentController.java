@@ -14,18 +14,18 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping ("/{filmId}")//film'e göre comment ekleme end point'i
+    @PostMapping("/{filmId}")
     public Comment createComment(@PathVariable Integer filmId, @RequestBody Comment commentRequest) {
         return commentService.createComment(filmId, commentRequest);
     }
 
-    @GetMapping("/{filmId}") // film'e göre comment listesi çıkarmak için end point
-    public List<Comment> getAllCommentsByFilmId(@PathVariable Integer filmId){
+    @GetMapping("/{filmId}")
+    public List<Comment> getAllCommentsByFilmId(@PathVariable Integer filmId) {
         return commentService.getCommentByFilmId(filmId);
     }
 
-    @DeleteMapping("/{commentId}") // comment silmek için end point
-    public String deleteCommentById(@PathVariable Integer commentId){
+    @DeleteMapping("/{commentId}")
+    public String deleteCommentById(@PathVariable Integer commentId) {
         return commentService.deleteCommentById(commentId);
     }
 }

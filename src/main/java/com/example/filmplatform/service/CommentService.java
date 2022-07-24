@@ -18,7 +18,8 @@ public class CommentService {
     CommentRepository commentRepository;
     @Autowired
     FilmRepository filmRepository;
-    public Comment createComment(Integer filmId, Comment commentRequest) { //comment yaratmak için metod
+
+    public Comment createComment(Integer filmId, Comment commentRequest) {
 
         Film foundFilm = filmRepository.findById(filmId).orElseThrow(() -> new FilmNotFoundException("There is no film."));
         foundFilm.getCommentList().add(commentRequest); //film'in comment listesine comment ekleniyor
@@ -28,12 +29,12 @@ public class CommentService {
         return commentRepository.save(commentRequest);
     }
 
-    public List<Comment> getCommentByFilmId(Integer filmId) { //film'e göre comment yapmak için metod
+    public List<Comment> getCommentByFilmId(Integer filmId) {
         Film foundFilm = filmRepository.findById(filmId).orElseThrow(() -> new FilmNotFoundException("There is no film."));
         return commentRepository.findByFilmId(foundFilm.getId());
     }
 
-    public String deleteCommentById(Integer commentId){ //Comment silmek için metod.
+    public String deleteCommentById(Integer commentId) {
         Comment foundComment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException("There is no comment."));
         commentRepository.delete(foundComment);
         return "Comment Deleted!";

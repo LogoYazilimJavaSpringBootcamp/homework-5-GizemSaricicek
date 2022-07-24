@@ -4,11 +4,10 @@ package com.example.filmplatform.dto;
 import com.example.filmplatform.model.enums.CurrencyType;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class Payment {
+public class PaymentDto {
 
     private Integer userId;
     private LocalDateTime paymentDate;
@@ -16,7 +15,7 @@ public class Payment {
     private Double amount;
     private Integer month; // 1-3-6-12
 
-    public Payment(Integer userId, LocalDateTime paymentDate, CurrencyType currencyType, Double amount, Integer month) {
+    public PaymentDto(Integer userId, LocalDateTime paymentDate, CurrencyType currencyType, Double amount, Integer month) {
         this.userId = userId;
         this.paymentDate = paymentDate;
         this.currencyType = currencyType;
