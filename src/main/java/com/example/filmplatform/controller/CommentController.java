@@ -14,9 +14,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping("/{filmId}")
-    public Comment createComment(@PathVariable Integer filmId, @RequestBody Comment commentRequest) {
-        return commentService.createComment(filmId, commentRequest);
+    @PostMapping("/{userId}/{filmId}") //buradaki userId  yorum yapacak kullanıcının id'si
+    public Comment createComment(@PathVariable Integer userId, @PathVariable Integer filmId, @RequestBody Comment commentRequest) {
+        return commentService.createComment(userId, filmId, commentRequest);
     }
 
     @GetMapping("/{filmId}")
