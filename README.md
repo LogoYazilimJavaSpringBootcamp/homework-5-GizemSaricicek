@@ -76,7 +76,7 @@ gereklidir.)
 * Üyelikler 1-3-6-12 ay olarak alınabilir.
 
 ### **Ücretlendirme ile ilgili bilgilendirme:**
-Sistemde girilen ay değerine göre ödenecek fiyat sistem içerisinden aktarılıyor.
+Sistemde girilen ay değerine göre ödenecek fiyat sistem içerisinden aktarılıyor. (her ay için 20 birim para)
 * 1 ay -> 20 (TL, USD, EUR)
 * 3 ay -> 60 (TL, USD, EUR)
 * 6 ay -> 120 (TL, USD, EUR)
